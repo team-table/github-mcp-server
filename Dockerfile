@@ -45,8 +45,9 @@ WORKDIR /server
 # Copy the binary from the build stage
 COPY --from=build /bin/github-mcp-server .
 # Expose the default port
-EXPOSE 8082
+EXPOSE 8080
 # Set the entrypoint to the server binary
 ENTRYPOINT ["/server/github-mcp-server"]
 # Default arguments for ENTRYPOINT
-CMD ["stdio"]
+ENV GITHUB_MCP_ENABLE_GRAPHQL=true
+CMD ["http", "--port", "8080", "--scope-challenge", "--toolsets", "default,graphql", "--features", "mcp_apps_disable_form_deferral"]
