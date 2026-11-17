@@ -64,10 +64,10 @@ func graphqlOperationTool(write bool) inventory.ServerTool {
 			return utils.NewToolResultErrorFromErr("Get GitHub client", err), nil, nil
 		}
 		endpoint := "graphql"
-		if strings.HasSuffix(client.BaseURL.Path, "/api/v3/") {
+		if strings.HasSuffix(client.BaseURL(), "/api/v3/") {
 			endpoint = "/api/graphql"
 		}
-		req, err := client.NewRequest(http.MethodPost, endpoint, graphqlPayload(input, write))
+		req, err := client.NewRequest(ctx, http.MethodPost, endpoint, graphqlPayload(input, write))
 		if err != nil {
 			return utils.NewToolResultErrorFromErr("Build GitHub GraphQL request", err), nil, nil
 		}
@@ -75,7 +75,7 @@ func graphqlOperationTool(write bool) inventory.ServerTool {
 			Data   json.RawMessage   `json:"data,omitempty"`
 			Errors []json.RawMessage `json:"errors,omitempty"`
 		}
-		if _, err := client.Do(ctx, req, &response); err != nil {
+		if _, err := client.Do(req, &response); err != nil {
 			return utils.NewToolResultErrorFromErr("GitHub GraphQL request failed", err), nil, nil
 		}
 		result := MarshalledTextResult(response)
