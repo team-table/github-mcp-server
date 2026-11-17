@@ -5,7 +5,7 @@ steps:
     args: ['build', '--target', 'build', '-t', 'github-mcp-build', '.']
   - id: test-graphql
     name: gcr.io/cloud-builders/docker
-    args: ['run', '--rm', '-e', 'CGO_ENABLED=0', 'github-mcp-build', 'go', 'test', './pkg/github', '-run', '^TestGraphQLOperationSelection$', '-count=1', '-v']
+    args: ['run', '--rm', '-e', 'CGO_ENABLED=0', 'github-mcp-build', 'go', 'test', './pkg/github', '-run', '^TestGraphQLOperation', '-count=1', '-v']
   - id: build-runtime
     name: gcr.io/cloud-builders/docker
     env: ['DOCKER_BUILDKIT=1']

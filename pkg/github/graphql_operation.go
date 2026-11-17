@@ -51,6 +51,7 @@ func graphqlOperationTool(write bool) inventory.ServerTool {
 	return NewTool(graphqlToolset, mcp.Tool{
 		Name:        name,
 		Description: description,
+		InputSchema: contextToolInputSchema[graphqlOperationInput](nil),
 		Annotations: &mcp.ToolAnnotations{ReadOnlyHint: !write, DestructiveHint: ToBoolPtr(write)},
 	}, scopes.NoScopes(), func(ctx context.Context, deps ToolDependencies, _ *mcp.CallToolRequest, input graphqlOperationInput) (*mcp.CallToolResult, any, error) {
 		if deps.GetFlags(ctx).LockdownMode || deps.IsFeatureEnabled(ctx, FeatureFlagIFCLabels) {

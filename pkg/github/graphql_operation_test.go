@@ -3,6 +3,7 @@ package github
 import (
 	"testing"
 
+	"github.com/modelcontextprotocol/go-sdk/mcp"
 	"github.com/stretchr/testify/require"
 )
 
@@ -24,4 +25,13 @@ func TestGraphQLOperationSelection(t *testing.T) {
 	read = graphqlPayload(in, false)
 	require.Equal(t, "MCPRequest", read.OperationName)
 	require.Equal(t, "query MCPRequest "+in.Operation, read.Query)
+}
+
+func TestGraphQLOperationRegistration(t *testing.T) {
+	server := mcp.NewServer(&mcp.Implementation{Name: "discovery-test", Version: "1"}, nil)
+	for _, write := range []bool{false, true} {
+		tool := graphqlOperationTool(write)
+		require.NotNil(t, tool.Tool.InputSchema)
+		tool.RegisterFunc(server, nil)
+	}
 }
