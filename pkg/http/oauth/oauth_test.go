@@ -692,7 +692,7 @@ func TestDefaultScopesRequireExplicitOptIn(t *testing.T) {
 	assert.Contains(t, SupportedScopes, "delete_repo")
 	assert.NotContains(t, DefaultScopes, "delete_repo")
 	assert.Contains(t, SupportedScopes, "workflow")
-	assert.NotContains(t, DefaultScopes, "workflow")
+	assert.Contains(t, DefaultScopes, "workflow")
 	assert.Contains(t, SupportedScopes, "codespace")
 	assert.NotContains(t, DefaultScopes, "codespace")
 	assert.Contains(t, SupportedScopes, "admin:org")

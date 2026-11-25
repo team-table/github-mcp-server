@@ -96,7 +96,7 @@ var oauthScopeDefinitions = []oauthScopeDefinition{
 	{scope: Project, byDefault: true},
 	{scope: Gist, byDefault: true},
 	{scope: Notifications, byDefault: true},
-	{scope: Workflow},
+	{scope: Workflow, byDefault: true},
 	{scope: Codespace},
 }
 

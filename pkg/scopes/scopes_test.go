@@ -14,7 +14,7 @@ func TestOAuthScopeCatalog(t *testing.T) {
 	assert.Contains(t, supported, string(DeleteRepo))
 	assert.NotContains(t, defaults, string(DeleteRepo))
 	assert.Contains(t, supported, string(Workflow))
-	assert.NotContains(t, defaults, string(Workflow))
+	assert.Contains(t, defaults, string(Workflow))
 	assert.Contains(t, supported, string(Codespace))
 	assert.NotContains(t, defaults, string(Codespace))
 	assert.Contains(t, supported, string(AdminOrg))
